@@ -13,3 +13,4 @@ export const getCurrent = (city) => async (dispatch) => {
     console.log(err);
   }
 };
+

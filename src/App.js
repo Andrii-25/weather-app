@@ -1,10 +1,12 @@
 import './App.css';
-import MainBlock from './components/MainBlock';
+import Header from './components/Header';
+import CurrentWeatherCard from './components/CurrentWeatherCard';
 
 function App() {
   return (
     <div>
-      <MainBlock></MainBlock>
+      <Header></Header>
+      <CurrentWeatherCard></CurrentWeatherCard>
     </div>
   );
 }

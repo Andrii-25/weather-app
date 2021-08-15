@@ -4,22 +4,24 @@ import { getCurrent } from "../actions/current.weather";
 import { useEffect } from "react";
 
 function Header() {
-  const dispatch = useDispatch();
-  const weatherData = useSelector(
-    (state) => state.currentWeather.currentWeather
-  );
-
-  useEffect(async () => {
-    await dispatch(getCurrent("Lviv"));
-  }, []);
 
   return (
-    <div
-      className="container-sm border-bottom border-2"
-      style={{ width: "100%" }}
-    >
-      {JSON.stringify(weatherData)}
-    </div>
+    <nav class="navbar navbar-light bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand">React Weather</a>
+        <form class="d-flex">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search city..."
+            aria-label="Search"
+          ></input>
+          <button class="btn btn-light" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+      </div>
+    </nav>
   );
 }
 
