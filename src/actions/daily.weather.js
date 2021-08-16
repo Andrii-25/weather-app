@@ -7,7 +7,7 @@ export const getDaily = (city) => async (dispatch) => {
 
     dispatch({
       type: GET_DAILY_WEATHER,
-      payload: res.data,
+      payload: res.data.data,
     });
   } catch (err) {
     console.log(err);

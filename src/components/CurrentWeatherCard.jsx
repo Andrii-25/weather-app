@@ -10,6 +10,7 @@ function CurrentWeatherCard() {
   const [iconCode, setIconCode] = useState("");
 
   const currentWeather = useSelector((state) => state.currentWeather);
+  const cityName = useSelector((state) => state.city);
 
   const getWeatherIcon = (city) => {
     axios
@@ -26,13 +27,13 @@ function CurrentWeatherCard() {
 
   useEffect(async () => {
     try {
-      await dispatch(getCurrent("Lviv"));
-      await getWeatherIcon("Lviv");
+      await dispatch(getCurrent(cityName));
+      await getWeatherIcon(cityName);
       setLoaded(true);
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [cityName]);
 
   const dateBuilder = (d) => {
     let date = new Date(d * 1000);
@@ -64,22 +65,22 @@ function CurrentWeatherCard() {
     >
       <div className="row mt-3">
         <div
-          className="col d-flex justify-content-center"
+          className="col d-flex justify-content-center mt-2"
           style={{ maxWidth: "150px" }}
         >
-          <img src={iconURL}></img>
+          <img src={iconURL} alt="weather-current-card"></img>
         </div>
 
-        <div className="col" style={{ maxWidth: "150px" }}>
-          <h3>{`${Math.round(currentWeather.main.temp)} °C`}</h3>
-          <h3>{`${currentWeather.name}, ${currentWeather.sys.country}`}</h3>
-          <h4>{dateBuilder(currentWeather.dt)}</h4>
+        <div className="col mt-3" style={{ maxWidth: "150px" }}>
+          <h5>{`${Math.round(currentWeather.main.temp)} °C`}</h5>
+          <h5>{`${currentWeather.name}, ${currentWeather.sys.country}`}</h5>
+          <h5>{dateBuilder(currentWeather.dt)}</h5>
         </div>
 
         <div className="col text-center" style={{ maxWidth: "200px" }}>
           <h5>Humidity</h5>
           <h2 className="mt-4">
-            <i class="bi bi-droplet"></i>
+            <i className="bi bi-droplet"></i>
             {` ${currentWeather.main.humidity} %`}
           </h2>
         </div>
@@ -87,7 +88,7 @@ function CurrentWeatherCard() {
         <div className="col text-center" style={{ maxWidth: "240px" }}>
           <h5>Wind status</h5>
           <h2 className="mt-4">
-            <i class="bi bi-wind"></i>
+            <i className="bi bi-wind"></i>
             {` ${currentWeather.wind.speed} km/h`}
           </h2>
         </div>
@@ -97,13 +98,13 @@ function CurrentWeatherCard() {
           <div className="row mt-4">
             <div className="col">
               <h2>
-                <i class="bi bi-sunrise"></i>
+                <i className="bi bi-sunrise"></i>
                 {` ${dateBuilder(currentWeather.sys.sunrise)}`}
               </h2>
             </div>
             <div className="col">
               <h2>
-                <i class="bi bi-sunset"></i>
+                <i className="bi bi-sunset"></i>
                 {` ${dateBuilder(currentWeather.sys.sunset)}`}
               </h2>
             </div>
